@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida al Usuario</title>
+    <link rel="stylesheet" href="./estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcome-message"></h1>
+        <h2 id="days-lived-message"></h2>   
+
+        <label for="nombre">Nombre:</label>
+        <br>
+        <input type="text" id="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <br>
+        <input type="text" id="apellido" required>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" required>
+
+        <button onclick="mostrarBienvenida()">Mostrar Bienvenida</button>
+    </div>
+
+    <script>
+        function mostrarBienvenida() {
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const fechaNacimiento = new Date(document.getElementById("fechaNacimiento").value);
+
+            if (nombre === "" || apellido === "" || isNaN(fechaNacimiento.getTime())) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            const mensajeBienvenida = `¡Bienvenido, ${nombre} ${apellido}!`;
+            document.getElementById("welcome-message").textContent = mensajeBienvenida;
+
+            const hoy = new Date();
+            const diferenciaMilisegundos = hoy - fechaNacimiento;
+            const diasVividos = Math.floor(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
+
+            const mensajeDiasVividos = `Has vivido aproximadamente ${diasVividos} días.`;
+            document.getElementById("days-lived-message").textContent = mensajeDiasVividos;
+        }
+    </script>
+</body>
+</html>
